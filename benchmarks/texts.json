@@ -1,0 +1,74 @@
+[
+  {
+    "id": 0,
+    "length": "short",
+    "text": "Hello, welcome to our voice assistant.",
+    "voice": "af_heart"
+  },
+  {
+    "id": 1,
+    "length": "short",
+    "text": "Please confirm your delivery address.",
+    "voice": "am_michael"
+  },
+  {
+    "id": 2,
+    "length": "short",
+    "text": "Your appointment is tomorrow at nine in the morning.",
+    "voice": "af_heart"
+  },
+  {
+    "id": 3,
+    "length": "short",
+    "text": "The train to London leaves in ten minutes.",
+    "voice": "am_michael"
+  },
+  {
+    "id": 4,
+    "length": "medium",
+    "text": "The weather forecast says that the morning will be clear, with a gentle breeze arriving from the coast by late afternoon.",
+    "voice": "af_heart"
+  },
+  {
+    "id": 5,
+    "length": "medium",
+    "text": "To reset your password, open the settings menu, select account security, and follow the instructions sent to your email address.",
+    "voice": "am_michael"
+  },
+  {
+    "id": 6,
+    "length": "medium",
+    "text": "Our new speech system helps people listen to articles, learn unfamiliar words, and interact with applications using a natural voice.",
+    "voice": "af_heart"
+  },
+  {
+    "id": 7,
+    "length": "medium",
+    "text": "The museum opens at ten o'clock on weekdays. Children can enter free of charge, and guided tours begin every thirty minutes.",
+    "voice": "am_michael"
+  },
+  {
+    "id": 8,
+    "length": "long",
+    "text": "On Saturday morning, Maya packed a small bag and set off towards the mountains. The road wound through quiet villages and fields of bright yellow flowers. After several hours, she reached a wooden bridge beside a clear stream, where she stopped to enjoy the view and share lunch with her friends.",
+    "voice": "af_heart"
+  },
+  {
+    "id": 9,
+    "length": "long",
+    "text": "A reliable voice assistant needs more than fast speech generation. It must pronounce words clearly, preserve the meaning of each sentence, and respond consistently when many people use it at the same time. Careful testing across short messages and longer passages helps reveal problems before a service reaches its customers.",
+    "voice": "am_michael"
+  },
+  {
+    "id": 10,
+    "length": "long",
+    "text": "The library has announced a new programme for local students. Every Wednesday afternoon, volunteers will help children practise reading and discover books about science, history, and the natural world. Families are welcome to join the first session, meet the organisers, and suggest topics for future workshops.",
+    "voice": "af_heart"
+  },
+  {
+    "id": 11,
+    "length": "long",
+    "text": "When the power returned, the team checked each computer and reviewed the records from the previous evening. Nothing important had been lost. They made fresh copies of the documents, called their colleagues to explain the delay, and agreed to finish the remaining work before the end of the day.",
+    "voice": "am_michael"
+  }
+]

@@ -1,0 +1,11 @@
+# Optional image for benchmark Jobs and eager baseline runs.
+ARG SERVER_IMAGE=kokoro-server:local
+FROM ${SERVER_IMAGE}
+RUN apt-get update && apt-get install -y --no-install-recommends espeak-ng \
+    && rm -rf /var/lib/apt/lists/*
+COPY requirements-client.txt /app/
+RUN python3 -m pip install --no-cache-dir torch==2.7.0 --index-url https://download.pytorch.org/whl/cu128 \
+    && python3 -m pip install --no-cache-dir -r requirements-client.txt
+COPY benchmarks /app/benchmarks
+ENV USE_TF=0 TOKENIZERS_PARALLELISM=false HF_HOME=/tmp/huggingface
+ENTRYPOINT ["python3", "-m", "kokoro_triton.benchmark"]

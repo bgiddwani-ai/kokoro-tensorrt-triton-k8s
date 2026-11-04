@@ -1,0 +1,18 @@
+Kokoro TensorRT / Triton Kubernetes integration
+
+Integration source is provided under the Apache License, Version 2.0.
+
+Public upstream models are obtained at runtime:
+  hexgrad/Kokoro-82M
+  https://huggingface.co/hexgrad/Kokoro-82M
+  nvidia/kokoro-82M-onnx-opt
+  https://huggingface.co/nvidia/kokoro-82M-onnx-opt
+
+Preserve the applicable upstream model licenses and notices. The preparation
+step saves the NVIDIA model's upstream LICENSE alongside generated models.
+No model weights, serialized TensorRT engines, proprietary datasets, or
+third-party container images are distributed by this source repository.
+
+Triton, TensorRT, CUDA, ONNX Runtime, Kokoro, and other dependencies remain
+subject to their respective licenses. Pulling NVIDIA containers is subject
+to the terms accompanying those containers.

@@ -1,0 +1,10 @@
+numpy==1.26.4
+torch==2.7.0
+kokoro==0.9.4
+transformers==4.51.3
+soundfile==0.14.0
+tritonclient[grpc]==2.74.0
+huggingface-hub==0.34.4
+spacy==3.8.18
+misaki[en]==0.9.4
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
