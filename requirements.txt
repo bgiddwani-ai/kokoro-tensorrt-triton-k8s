@@ -1,10 +1,15 @@
 numpy==1.26.4
+onnx==1.18.0
+onnxruntime-gpu==1.22.0
+cupy-cuda12x==13.4.1
+fastrlock==0.8.3
+huggingface-hub==0.34.4
+sympy==1.13.3
 torch==2.7.0
 kokoro==0.9.4
 transformers==4.51.3
 soundfile==0.14.0
 tritonclient[grpc]==2.74.0
-huggingface-hub==0.34.4
 spacy==3.8.18
 misaki[en]==0.9.4
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl

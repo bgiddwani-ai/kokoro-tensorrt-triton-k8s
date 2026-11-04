@@ -1,7 +1,0 @@
-numpy==1.26.4
-onnx==1.18.0
-onnxruntime-gpu==1.22.0
-cupy-cuda12x==13.4.1
-fastrlock==0.8.3
-huggingface-hub==0.34.4
-sympy==1.13.3

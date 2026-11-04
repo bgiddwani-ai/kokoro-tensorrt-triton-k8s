@@ -25,10 +25,10 @@ class Settings:
     def from_env(cls):
         value = cls(
             data=Path(os.getenv("KOKORO_DATA_DIR", "/data")),
-            workers=int(os.getenv("KOKORO_WORKERS", "1")),
+            workers=int(os.getenv("KOKORO_WORKERS", "4")),
             max_tokens=int(os.getenv("KOKORO_MAX_TOKENS", "500")),
             max_frames=int(os.getenv("KOKORO_MAX_FRAMES", "2000")),
-            workspace_mib=int(os.getenv("KOKORO_WORKSPACE_MIB", "2048")),
+            workspace_mib=int(os.getenv("KOKORO_WORKSPACE_MIB", "4096")),
             threads=int(os.getenv("KOKORO_CPU_THREADS", "4")),
         )
         if not 1 <= value.workers <= 16:

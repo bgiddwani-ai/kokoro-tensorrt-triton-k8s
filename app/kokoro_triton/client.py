@@ -14,7 +14,6 @@ import numpy as np
 import soundfile as sf
 import tritonclient.grpc as grpc
 from huggingface_hub import hf_hub_download
-from kokoro import KPipeline
 
 from .contract import validate_inputs
 from .settings import EAGER_REPOSITORY, EAGER_REVISION, SAMPLE_RATE
@@ -41,6 +40,8 @@ class Frontend:
             raise ValueError("voice must be a model voice name such as af_heart")
         language = voice[0]
         if language not in self.pipelines:
+            from kokoro import KPipeline
+
             self.pipelines[language] = KPipeline(
                 lang_code=language, model=False, repo_id=EAGER_REPOSITORY
             )

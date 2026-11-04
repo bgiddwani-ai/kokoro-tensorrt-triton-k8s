@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "context": {
+    "scope": "Reference model and Triton container measurements collected before Kubernetes packaging.",
+    "kubernetes_measured": false,
+    "allocation": "One allocated NVIDIA GPU; infrastructure and device identifiers are not published.",
+    "transferability": "Results describe this workload and runtime; rerun on your target device.",
+    "runtime": {
+      "triton": "2.56.0",
+      "tensorrt": "10.9",
+      "cuda": "12.8",
+      "onnxruntime": "1.22.0"
+    },
+    "selected": {
+      "config": "mps4",
+      "workers": 4,
+      "mps": true,
+      "concurrency": 4,
+      "workspace_mib": 4096,
+      "precision": "FP32/TF32",
+      "max_tokens": 500,
+      "max_frames": 2000
+    },
+    "repository_defaults": {
+      "workers": 4,
+      "mps": true,
+      "workspace_mib": 4096
+    }
+  },
+  "workload": {
+    "passages": 12,
+    "voices": [
+      "af_heart",
+      "am_michael"
+    ],
+    "speed": 1.0,
+    "sample_rate": 24000,
+    "model_warmups": 3,
+    "model_repetitions": 8,
+    "text_repetitions": 3,
+    "groups": {
+      "short": {
+        "passages": 4,
+        "tokens_min": 38,
+        "tokens_max": 51
+      },
+      "medium": {
+        "passages": 4,
+        "tokens_min": 117,
+        "tokens_max": 142
+      },
+      "long": {
+        "passages": 4,
+        "tokens_min": 282,
+        "tokens_max": 332
+      }
+    },
+    "audio_seconds_min": 2.875,
+    "audio_seconds_max": 22.75
+  },
+  "core_p50_ms": {
+    "eager": {
+      "short": 28.394158498485922,
+      "medium": 40.459883499352145,
+      "long": 66.86624450048839
+    },
+    "native_trt": {
+      "short": 17.33621550101816,
+      "medium": 38.68174750004982,
+      "long": 79.57928550058568
+    },
+    "hybrid": {
+      "short": 14.606637500037323,
+      "medium": 27.10272150034143,
+      "long": 48.22367650012893
+    }
+  },
+  "text_to_audio_p50_ms": {
+    "eager": {
+      "short": 31.69209899897396,
+      "medium": 44.878036500449525,
+      "long": 70.9123755004839
+    },
+    "optimized": {
+      "short": 21.921572501014452,
+      "medium": 34.754005500872154,
+      "long": 59.02735199924791
+    }
+  },
+  "sustained": {
+    "instances": 4,
+    "concurrency": 4,
+    "duration_s": 30.071825771003205,
+    "requests": 1954,
+    "requests_per_s": 64.97776406659509,
+    "audio_s_per_s": 679.6585999014403,
+    "p50_ms": 53.78507100067509,
+    "p95_ms": 105.60803275093349,
+    "p99_ms": 113.9467104927462,
+    "max_ms": 120.35743200249271,
+    "errors": 0,
+    "finite_responses": 1954
+  },
+  "quality": {
+    "eager_wer": 0.026143790849673203,
+    "served_wer": 0.026143790849673203,
+    "eager_cer": 0.011308562197092083,
+    "served_cer": 0.011308562197092083,
+    "wer_delta_percentage_points": 0.0,
+    "cer_delta_percentage_points": 0.0,
+    "finite_cases": 12,
+    "cases": 12,
+    "max_abs_duration_error_percent": 0.28653295128940237,
+    "asr": "Whisper small.en, CPU int8; matched transcription settings"
+  },
+  "matrix": {
+    "cells": 66,
+    "requests": 10560,
+    "requests_per_cell_min": 96,
+    "requests_per_cell_max": 384,
+    "concurrency": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "configurations": {
+      "p1d1b2_fp32": "Native TRT \u00b7 P1 / D1 / bridge2",
+      "p2d2b4_fp32": "Native TRT \u00b7 P2 / D2 / bridge4",
+      "p2d4b4_fp32": "Native TRT \u00b7 P2 / D4 / bridge4",
+      "p4d4b8_fp32": "Native TRT \u00b7 P4 / D4 / bridge8",
+      "hybrid1": "Hybrid \u00b7 1 worker",
+      "hybrid2": "Hybrid \u00b7 2 workers",
+      "hybrid4": "Hybrid \u00b7 4 workers",
+      "hybrid8": "Hybrid \u00b7 8 workers",
+      "mps2": "Hybrid + MPS \u00b7 2 workers",
+      "mps4": "Hybrid + MPS \u00b7 4 workers",
+      "mps8": "Hybrid + MPS \u00b7 8 workers"
+    }
+  },
+  "sources": {
+    "eager_repository": "hexgrad/Kokoro-82M",
+    "eager_revision": "f3ff3571791e39611d31c381e3a41a3af07b4987",
+    "onnx_repository": "nvidia/kokoro-82M-onnx-opt",
+    "onnx_revision": "4715915bc1a4af683ceb826a2d365d59ec666d13",
+    "onnx_sha256": "89abd5cc24130a0e3b9047a6c08ab4cde5bf5f83c92aacc02cffc0084fc3ebfa",
+    "asr_revision": "d1d751a5f8271d482d14ca55d9e2deeebbae577f"
+  }
+}

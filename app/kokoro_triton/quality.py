@@ -17,7 +17,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--eager-dir", required=True)
     parser.add_argument("--triton-dir", required=True)
-    parser.add_argument("--corpus", default="benchmarks/texts.json")
+    parser.add_argument(
+        "--corpus", default=str(Path(__file__).resolve().parents[1] / "texts.json")
+    )
     parser.add_argument("--out", default="artifacts/quality.json")
     parser.add_argument("--max-wer-delta", type=float, default=0.0)
     parser.add_argument("--max-cer-delta", type=float, default=0.0)

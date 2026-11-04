@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kokoro
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kokoro-data
+  namespace: kokoro
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kokoro
+  namespace: kokoro
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: kokoro
+  template:
+    metadata:
+      labels:
+        app: kokoro
+    spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: kokoro
+          image: CONTAINER_IMAGE
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          env:
+            - name: KOKORO_WORKERS
+              value: "4"
+            - name: KOKORO_MPS
+              value: "1"
+            - name: KOKORO_WORKSPACE_MIB
+              value: "4096"
+          resources:
+            requests:
+              cpu: "4"
+              memory: 8Gi
+              nvidia.com/gpu: "1"
+            limits:
+              cpu: "16"
+              memory: 24Gi
+              nvidia.com/gpu: "1"
+          ports:
+            - name: http
+              containerPort: 8000
+            - name: grpc
+              containerPort: 8001
+            - name: metrics
+              containerPort: 8002
+          startupProbe:
+            httpGet: {path: /v2/health/ready, port: http}
+            periodSeconds: 10
+            failureThreshold: 180
+          readinessProbe:
+            httpGet: {path: /v2/models/kokoro/ready, port: http}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /v2/health/live, port: http}
+            periodSeconds: 30
+            failureThreshold: 3
+          volumeMounts:
+            - {name: data, mountPath: /data}
+            - {name: shm, mountPath: /dev/shm}
+            - {name: temporary, mountPath: /tmp}
+      volumes:
+        - name: data
+          persistentVolumeClaim: {claimName: kokoro-data}
+        - name: shm
+          emptyDir: {medium: Memory, sizeLimit: 1Gi}
+        - name: temporary
+          emptyDir: {sizeLimit: 2Gi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kokoro
+  namespace: kokoro
+spec:
+  type: ClusterIP
+  selector:
+    app: kokoro
+  ports:
+    - {name: http, port: 8000, targetPort: http}
+    - {name: grpc, port: 8001, targetPort: grpc}
+    - {name: metrics, port: 8002, targetPort: metrics}

@@ -1,24 +1,17 @@
 name: Validate
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 permissions:
   contents: read
 jobs:
-  cpu-validation:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: pip
-          cache-dependency-path: requirements-test.txt
-      - uses: azure/setup-kubectl@v4
-        with:
-          version: v1.32.0
-      - run: python -m pip install -r requirements-test.txt
-      - run: ruff check . && ruff format --check .
-      - run: bash -n scripts/entrypoint.sh scripts/kube.sh
-      - run: make test
+      - run: python -m pip install numpy==1.26.4 onnx==1.18.0 onnxruntime==1.22.0 PyYAML==6.0.2 kubernetes-validate==1.32.0 ruff==0.11.2
+      - run: ruff check app && ruff format --check app
+      - run: bash -n app/entrypoint.sh
+      - run: PYTHONPATH=app python -m unittest discover -s app/tests -v
       - run: git diff --check
